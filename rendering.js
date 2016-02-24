@@ -7,6 +7,8 @@ define([
 function (_, $) {
   'use strict';
 
+ var default_height = 200;
+
   function panelLink(scope, elem, attrs, ctrl) {
     var data, panel;
     elem = elem.find('.piechart-panel');
@@ -20,7 +22,7 @@ function (_, $) {
 
     function setElementHeight() {
       try {
-        var height = ctrl.height || panel.height || scope.row.height;
+        var height = ctrl.height || panel.height || scope.row.height || default_height;
         if (_.isString(height)) {
           height = parseInt(height.replace('px', ''), 10);
         }
@@ -40,7 +42,7 @@ function (_, $) {
       var width = elem.width();
       var height = elem.height();
 
-      var size = Math.min(width, height);
+      var size = Math.min(width, height) || default_height;
 
       var plotCanvas = $('<div></div>');
       var plotCss = {};
